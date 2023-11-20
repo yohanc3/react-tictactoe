@@ -54,6 +54,7 @@ export default function Game() {
   const [history, setHistory] = useState<Array<Array<string | null>>>([
     Array(9).fill(null),
   ]);
+
   const [currentMove, setCurrentMove] = useState<number>(0);
   const [isReversed, setReversed] = useState<boolean>(false);
   const [isReplay, setIsReplay] = useState<boolean>(false);
