@@ -1,0 +1,99 @@
+.square {
+  width: 3rem;
+  height: 3rem;
+}
+
+.game {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+.board-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.board-div {
+  padding: 3rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: baseline;
+  /* border: 1px solid black; */
+}
+
+.board {
+  /* border: 1px solid black; */
+}
+
+.game-board {
+  /* border: 1px solid black; */
+
+  width: 40%;
+  display: inline-block;
+}
+
+.winnerStatus {
+  /* border: 1px solid black; */
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.game-info {
+  width: 100%;
+  /* border: 1px solid black; */
+  display: inline-flex;
+  justify-content: center;
+}
+
+.game-moves {
+  padding-left: 7rem;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+  width: 100%;
+  list-style-type: none;
+}
+
+.firstLi {
+  list-style-type: none;
+}
+
+.winner-square {
+  background-color: rgba(144, 238, 144, 0.333);
+  width: 3rem;
+  height: 3rem;
+}
+.replay-square {
+  background-color: rgba(167, 235, 89, 0.333);
+  width: 3rem;
+  height: 3rem;
+}
+
+.squares-y-axis {
+  display: flex;
+  padding-left: 1.2rem;
+  padding-bottom: 0.5rem;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.squares-x-axis {
+  padding-right: 0.7rem;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.box-squares {
+  display: flex;
+}
+
+.board-squares {
+  display: inline-flex;
+  flex-direction: column;
+}
