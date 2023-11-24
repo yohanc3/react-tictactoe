@@ -23,14 +23,7 @@ export default function Board({
   let winner: string | undefined | null = undefined;
   let status: string;
   let winnerLines: number[] | undefined = undefined;
-  const board = getBoard({
-    winnerLines,
-    squares,
-    onPlay,
-    isReplay,
-    currentReplayBox,
-    xIsNext,
-  });
+  const totalBoardSquares = 9;
 
   if (winnerData) {
     winner = winnerData?.winner;
@@ -44,6 +37,16 @@ export default function Board({
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
+
+  const board = getBoard({
+    winnerLines,
+    squares,
+    onPlay,
+    isReplay,
+    currentReplayBox,
+    xIsNext,
+    totalBoardSquares,
+  });
 
   return (
     <>

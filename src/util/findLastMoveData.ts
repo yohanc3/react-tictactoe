@@ -21,8 +21,8 @@ export default function findLastMoveData(
     if (actualBoard[i] !== previousBoard[i]) {
       differentMove = i;
     }
-    if (actualBoard[i] !== previousBoard[i] && i === 9) {
-      differentMove = -1;
+    if (actualBoard[i] !== previousBoard[i] && i === 8) {
+      differentMove = 8;
     }
   }
 
@@ -37,7 +37,7 @@ export default function findLastMoveData(
   player = actualBoard[differentMove];
 
   let boxNumber: number = -1;
-  if (x && y) {
+  if (x !== -1 || y !== -1) {
     boxNumber = x * 3 + y;
   }
 

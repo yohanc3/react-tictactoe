@@ -10,6 +10,7 @@ interface GetBoardProps {
   isReplay: boolean;
   currentReplayBox: number | null | undefined;
   xIsNext: boolean;
+  totalBoardSquares: number;
 }
 
 export default function getBoard({
@@ -19,27 +20,32 @@ export default function getBoard({
   isReplay,
   currentReplayBox,
   xIsNext,
+  totalBoardSquares,
 }: GetBoardProps) {
-  let count: number = -1;
-  let board = Array(3)
+  const boardLength = Math.sqrt(totalBoardSquares);
+  if (boardLength % 0) return;
+
+  let squareNumber: number = -1;
+
+  const board = Array(boardLength)
     .fill(null)
     .map((value, index) => {
       return (
         <div key={index} className="board-row">
-          {Array(3)
+          {Array(boardLength)
             .fill(null)
             .map((v, i) => {
-              count++;
-              let secondCount: number = count + 0;
+              squareNumber++;
+              const squareNumberCopy: number = squareNumber + 0;
 
               return (
                 <Square
-                  key={i}
-                  squareNumber={secondCount}
+                  key={squareNumberCopy}
+                  squareNumber={squareNumberCopy}
                   winnerData={winnerLines}
-                  value={squares[count]}
+                  value={squares[squareNumberCopy]}
                   onSquareClick={() =>
-                    handleClick(secondCount, squares, xIsNext, onPlay)
+                    handleClick(squareNumberCopy, squares, xIsNext, onPlay)
                   }
                   isReplay={isReplay}
                   currentReplayBox={currentReplayBox}
@@ -49,6 +55,7 @@ export default function getBoard({
         </div>
       );
     });
+
   return board;
 }
 

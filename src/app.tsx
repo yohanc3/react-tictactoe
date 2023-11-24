@@ -2,9 +2,9 @@ import { ButtonHTMLAttributes, useContext, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import Square from "./components/Square";
-import Board from "./components/overlayBoard";
+import Board from "./components/OverlayBoard";
 import findLastMoveData from "./util/findLastMoveData";
-import getMovesHistory from "./components/getMovesHistory";
+import movesPane from "./components/MovesHistoryPane";
 import "./App.css";
 
 export default function Game() {
@@ -17,7 +17,7 @@ export default function Game() {
   const xIsNext = currentMove % 2 === 0;
   const currentSquares: Array<string | null> = history![currentMove];
   //moves is the history of past moves sidebar
-  const moves = getMovesHistory(
+  const MovesHistoryPane = movesPane(
     history,
     xIsNext,
     currentMove,
@@ -68,7 +68,7 @@ export default function Game() {
         />
       </div>
       <div className="game-info">
-        <ol className="game-moves">{moves}</ol>
+        <ol className="game-moves">{MovesHistoryPane}</ol>
       </div>
     </div>
   );

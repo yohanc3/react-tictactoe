@@ -7,7 +7,7 @@ interface CoordsData {
   boxNumber: number | null;
 }
 
-export default function getMoves(
+export default function movesPane(
   history: Array<Array<string | null>>,
   xIsNext: boolean,
   currentMove: number,
@@ -22,18 +22,12 @@ export default function getMoves(
       history[move - 1],
       move
     );
-    let shouldShowButton;
-    let button;
-
-    let buttonText: string | undefined = undefined;
 
     let coords: string | undefined = undefined;
 
     if (coordsData !== undefined) {
       coords = `${coordsData.x}, ${coordsData.y}`;
     }
-
-    let nextPlayer = !xIsNext ? "X" : "O";
 
     if (coords !== undefined && coordsData !== undefined) {
       if (typeof coordsData.player === "string" && coords) {
@@ -51,10 +45,13 @@ export default function getMoves(
       typeof coordsData.x === "number" &&
       typeof coordsData.y === "number"
     ) {
-      coords = `${coordsData.x}, ${coordsData.y}`;
+      coords = `${coordsData.y}, ${coordsData.x}`;
     } else {
       coords = undefined;
     }
+
+    let button: React.Node | string;
+    let nextPlayer: string = !xIsNext ? "X" : "O";
 
     if (move === currentMove) {
       if (move === 0) {
@@ -74,11 +71,10 @@ export default function getMoves(
       description = "Go to move #" + move;
     } else {
       description = "Go to game start";
-      coords = "";
       button = <button onClick={() => jumpTo(move)}>{`${description}`}</button>;
     }
 
-    if (!button && !buttonText) {
+    if (!button) {
       button = (
         <button onClick={() => jumpTo(move)}>
           {`${description} --- ${coords} Player: ${playerFromCurrentMove}`}
