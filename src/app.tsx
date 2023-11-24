@@ -1,10 +1,10 @@
 import { ButtonHTMLAttributes, useContext, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-import Square from "./components/square";
-import Board from "./components/board";
+import Square from "./components/Square";
+import Board from "./components/overlayBoard";
 import findLastMoveData from "./util/findLastMoveData";
-import getMovesHistory from "./util/getMovesHistory";
+import getMovesHistory from "./components/getMovesHistory";
 import "./App.css";
 
 export default function Game() {

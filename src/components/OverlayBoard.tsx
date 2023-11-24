@@ -1,13 +1,13 @@
 import calculateWinner from "../util/calculateWinner";
-import Square from "../components/square";
-import getBoard from "../util/getBoard";
+import Square from "./Square";
+import getBoard from "./GameBoard";
 
-type onPlayType = (nextSquares: Array<string | null>) => void;
+type OnPlayType = (nextSquares: Array<string | null>) => void;
 
 interface BoardProps {
   xIsNext: boolean;
   squares: Array<string | null>;
-  onPlay: onPlayType;
+  onPlay: OnPlayType;
   isReplay: boolean;
   currentReplayBox: number | null | undefined;
 }

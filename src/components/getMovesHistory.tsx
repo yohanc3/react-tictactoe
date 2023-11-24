@@ -1,6 +1,6 @@
-import findLastMoveData from "./findLastMoveData";
+import findLastMoveData from "../util/findLastMoveData";
 
-interface coordsData {
+interface CoordsData {
   x: number | null;
   y: number | null;
   player: string | null;
@@ -17,7 +17,7 @@ export default function getMoves(
   let moves = history.map((squares: Array<string | null>, move: number) => {
     let description: string = "";
     let playerFromCurrentMove: string | undefined = undefined;
-    let coordsData: coordsData | undefined = findLastMoveData(
+    let coordsData: CoordsData | undefined = findLastMoveData(
       squares,
       history[move - 1],
       move

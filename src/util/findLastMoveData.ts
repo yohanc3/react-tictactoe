@@ -1,4 +1,4 @@
-interface coordsData {
+interface CoordsData {
   x: number | null;
   y: number | null;
   player: string | null;
@@ -12,7 +12,7 @@ export default function findLastMoveData(
 ) {
   let x: number = -1,
     y: number = -1,
-    coords: coordsData,
+    coords: CoordsData,
     differentMove: number = -1,
     player: string | null;
   if (move === 0) return;

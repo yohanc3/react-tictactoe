@@ -1,4 +1,4 @@
-interface squareProps {
+interface SquareProps {
   value: string | null;
   onSquareClick(event: React.MouseEvent<HTMLButtonElement>): void;
   winnerData: number[] | undefined;
@@ -14,7 +14,7 @@ export default function Square({
   squareNumber,
   currentReplayBox,
   isReplay,
-}: squareProps) {
+}: SquareProps) {
   let className: string = "square";
   if (winnerData !== undefined) {
     className = winnerData.includes(squareNumber) ? "winner-square" : "square";
