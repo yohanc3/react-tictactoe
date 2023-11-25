@@ -1,6 +1,6 @@
 import calculateWinner from "../util/calculateWinner";
 import Square from "./Square";
-import getBoard from "./GameBoard";
+import Board from "./GameBoard";
 
 type OnPlayType = (nextSquares: Array<string | null>) => void;
 
@@ -12,7 +12,7 @@ interface BoardProps {
   currentReplayBox: number | null | undefined;
 }
 
-export default function Board({
+export default function OverlayBoard({
   xIsNext,
   squares,
   onPlay,
@@ -38,7 +38,7 @@ export default function Board({
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
 
-  const board = getBoard({
+  const board = Board({
     winnerLines,
     squares,
     onPlay,

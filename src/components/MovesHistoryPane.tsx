@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import findLastMoveData from "../util/findLastMoveData";
 
 interface CoordsData {
@@ -7,7 +8,7 @@ interface CoordsData {
   boxNumber: number | null;
 }
 
-export default function movesPane(
+export default function MovesPane(
   history: Array<Array<string | null>>,
   xIsNext: boolean,
   currentMove: number,
@@ -50,7 +51,7 @@ export default function movesPane(
       coords = undefined;
     }
 
-    let button: React.Node | string;
+    let button: ReactNode | string;
     let nextPlayer: string = !xIsNext ? "X" : "O";
 
     if (move === currentMove) {

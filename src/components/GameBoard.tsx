@@ -1,19 +1,19 @@
 import Square from "./Square";
 import calculateWinner from "../util/calculateWinner";
 
-type onPlayType = (nextSquares: Array<string | null>) => void;
+type OnPlayType = (nextSquares: Array<string | null>) => void;
 
 interface GetBoardProps {
   winnerLines: number[] | undefined;
   squares: Array<string | null>;
-  onPlay: onPlayType;
+  onPlay: OnPlayType;
   isReplay: boolean;
   currentReplayBox: number | null | undefined;
   xIsNext: boolean;
   totalBoardSquares: number;
 }
 
-export default function getBoard({
+export default function GameBoard({
   winnerLines,
   squares,
   onPlay,
