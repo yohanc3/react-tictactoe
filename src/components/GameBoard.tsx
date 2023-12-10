@@ -1,70 +1,35 @@
 import Square from "./Square";
 import calculateWinner from "../util/calculateWinner";
 
-type OnPlayType = (nextSquares: Array<string | null>) => void;
-
-interface GetBoardProps {
-  winnerLines: number[] | undefined;
+interface GetBoardProps { 
+  winnerData: number[] | undefined;
   squares: Array<string | null>;
-  onPlay: OnPlayType;
+  onPlay: (nextSquares: (string | null)[]) => void;
   isReplay: boolean;
   currentReplayBox: number | null | undefined;
   xIsNext: boolean;
   totalBoardSquares: number;
 }
 
-export default function GameBoard({
-  winnerLines,
-  squares,
-  onPlay,
-  isReplay,
-  currentReplayBox,
-  xIsNext,
-  totalBoardSquares,
-}: GetBoardProps) {
-  const boardLength = Math.sqrt(totalBoardSquares);
-  if (boardLength % 0) return;
+export default function GameBoard({ winnerData, squares, onPlay, isReplay, currentReplayBox, xIsNext, totalBoardSquares }: GetBoardProps) {
+  const length = Math.sqrt(totalBoardSquares);
 
-  let squareNumber: number = -1;
+  return Array.from({ length }, (value, rowIndex) => {
+    return (
+      <div key={rowIndex} className="board-row">
+        {Array.from({ length }, (v, colIndex) => {
+          const squareNumber = rowIndex * length + colIndex;
+          const key = squareNumber;
+          const onClick = () => handleClick(squareNumber, squares, xIsNext, onPlay);
 
-  const board = Array(boardLength)
-    .fill(null)
-    .map((value, index) => {
-      return (
-        <div key={index} className="board-row">
-          {Array(boardLength)
-            .fill(null)
-            .map((v, i) => {
-              squareNumber++;
-              const squareNumberCopy: number = squareNumber + 0;
-
-              return (
-                <Square
-                  key={squareNumberCopy}
-                  squareNumber={squareNumberCopy}
-                  winnerData={winnerLines}
-                  value={squares[squareNumberCopy]}
-                  onSquareClick={() =>
-                    handleClick(squareNumberCopy, squares, xIsNext, onPlay)
-                  }
-                  isReplay={isReplay}
-                  currentReplayBox={currentReplayBox}
-                />
-              );
-            })}
-        </div>
-      );
-    });
-
-  return board;
+          return <Square {...{ key, squareNumber, winnerData, onClick, isReplay, currentReplayBox }}> {squares[squareNumber] }</Square>;
+        })}
+      </div>
+    );
+  });
 }
 
-function handleClick(
-  squareIndex: number,
-  squares: Array<string | null>,
-  xIsNext: boolean,
-  onPlay: Function
-) {
+function handleClick(squareIndex: number, squares: Array<string | null>, xIsNext: boolean, onPlay: Function) {
   if (squares[squareIndex] || calculateWinner(squares)) return;
 
   const newSquares = squares.slice();

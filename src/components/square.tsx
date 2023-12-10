@@ -1,30 +1,14 @@
 interface SquareProps {
-  value: string | null;
-  onSquareClick(event: React.MouseEvent<HTMLButtonElement>): void;
+  children: React.ReactNode;
   winnerData: number[] | undefined;
   squareNumber: number;
+  onClick(event: React.MouseEvent<HTMLButtonElement>): void;
   currentReplayBox: number | null | undefined;
   isReplay: boolean;
 }
 
-export default function Square({
-  value,
-  onSquareClick,
-  winnerData,
-  squareNumber,
-  currentReplayBox,
-  isReplay,
-}: SquareProps) {
-  let className: string = "square";
-  if (winnerData !== undefined) {
-    className = winnerData.includes(squareNumber) ? "winner-square" : "square";
-  } else if (currentReplayBox === squareNumber && isReplay) {
-    className = "replay-square";
-  }
+export default function Square({ children, onClick, winnerData, squareNumber, currentReplayBox, isReplay }: SquareProps) {
+  const className = winnerData?.includes(squareNumber) ? "winner-square" : currentReplayBox === squareNumber && isReplay ? "replay-square" : "square";
 
-  return (
-    <button className={className} onClick={onSquareClick}>
-      {value}
-    </button>
-  );
+  return <button {...{ onClick, className }}>{children}</button>;
 }

@@ -97,3 +97,7 @@
   display: inline-flex;
   flex-direction: column;
 }
+
+.movesPaneButton{
+  width: 10rem;
+}

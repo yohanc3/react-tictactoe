@@ -1,32 +1,19 @@
-import { ButtonHTMLAttributes, useContext, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import Square from "./components/Square";
+import { useState } from "react";
 import Board from "./components/OverlayBoard";
 import findLastMoveData from "./util/findLastMoveData";
-import movesPane from "./components/MovesHistoryPane";
+import MovesHistoryPane from "./components/MovesHistoryPane";
 import "./App.css";
 
 export default function Game() {
-  const [history, setHistory] = useState<Array<Array<string | null>>>([
-    Array(9).fill(null),
-  ]);
-  const [currentMove, setCurrentMove] = useState<number>(0);
-  const [isReversed, setReversed] = useState<boolean>(false);
-  const [isReplay, setIsReplay] = useState<boolean>(false);
+  const [history, setHistory] = useState([Array(9).fill(null) as (string | null)[]]);
+  const [currentMove, setCurrentMove] = useState(0);
+  const [isReversed, setReversed] = useState(false);
+  const [isReplay, setIsReplay] = useState(false);
   const xIsNext = currentMove % 2 === 0;
-  const currentSquares: Array<string | null> = history![currentMove];
-  //moves is the history of past moves sidebar
-  const MovesHistoryPane = movesPane(
-    history,
-    xIsNext,
-    currentMove,
-    jumpTo,
-    isReversed
-  );
+  const squares = history![currentMove];
 
-  function handlePlay(nextSquares: Array<string | null>) {
-    const nextHistory: Array<Array<string | null>> = [
+  function onPlay(nextSquares: (string | null)[]) {
+    const nextHistory = [
       ...history.slice(0, currentMove + 1),
       nextSquares,
     ];
@@ -46,13 +33,8 @@ export default function Game() {
 
   function findCurrentReplayBox() {
     if (currentMove === 0) return;
-    let replayBoxIndex: number | null = findLastMoveData(
-      history[currentMove],
-      history[currentMove - 1],
-
-      currentMove
-    )!.boxNumber;
-    return replayBoxIndex;
+    return findLastMoveData(history[currentMove], history[currentMove - 1], currentMove)!.boxNumber;
+  
   }
 
   return (
@@ -60,15 +42,11 @@ export default function Game() {
       <button onClick={() => reverseMoves()}>Reverse</button>
       <div className="game-board">
         <Board
-          xIsNext={xIsNext}
-          squares={currentSquares}
-          onPlay={handlePlay}
-          isReplay={isReplay}
-          currentReplayBox={findCurrentReplayBox()}
+          {...{xIsNext, squares, onPlay, isReplay}} currentReplayBox={findCurrentReplayBox()}
         />
       </div>
       <div className="game-info">
-        <ol className="game-moves">{MovesHistoryPane}</ol>
+        <ol className="game-moves"> <MovesHistoryPane {...{history, currentMove, jumpTo, isReversed}}/> </ol>
       </div>
     </div>
   );
